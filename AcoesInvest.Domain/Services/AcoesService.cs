@@ -17,4 +17,8 @@ public class AcoesService : IAcoesService
         return await _acoesRepository.BuscarAcoes();
     }
 
+    public async Task<IEnumerable<Acoes>> BuscarAcoesNome(string nome)
+    {
+        return await _acoesRepository.BuscarAcoesNome(nome);
+    }
 }

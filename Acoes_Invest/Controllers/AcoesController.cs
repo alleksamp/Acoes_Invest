@@ -13,12 +13,19 @@ public class AcoesController : Controller
         _acoesAppService = acoesAppService;
     }
 
-    [HttpGet("api/acoes/listar")]
+    [HttpGet("Listar Ações")]
     public async Task<IActionResult> BuscarAcoes()
     {
         return Ok(await _acoesAppService.BuscarAcoes());
     }
 
+    [HttpGet("Buscar por nome")]
+    public async Task<IActionResult> BuscarAcoesNome(string nome)
+    {
+        var acoes = await _acoesAppService.BuscarAcoesNome(nome);
+        if (!acoes.Any()) return NotFound($"Ação {nome} não encontrada.");
+        return Ok(acoes);
+    }
 
 
 }

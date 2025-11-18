@@ -20,4 +20,10 @@ public class AcoesRepository : BaseRepository<Acoes>, IAcoesRepository
         return await _context.Acoes.ToListAsync();
     }
 
+    public async Task<IEnumerable<Acoes>> BuscarAcoesNome(string nome)
+    {
+        var result = await _context.Acoes.Where(x => x.Nome.Contains(nome)).ToListAsync();
+
+        return result;
+    }
 }
