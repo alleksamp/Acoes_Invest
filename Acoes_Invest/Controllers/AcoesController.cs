@@ -44,7 +44,7 @@ public class AcoesController : Controller
         return Ok(result);
     }
 
-    [HttpDelete]
+    [HttpDelete("Deletar ações")]
     public async Task<IActionResult> DeletarAcoes(int Id)
     {
         var result = await _acoesAppService.DeletarAcoes(Id);
