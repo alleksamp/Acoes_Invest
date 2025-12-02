@@ -21,5 +21,10 @@ public class UsuariosAppService : IUsuariosAppService
         return _Mapper.Map<IEnumerable<UsuariosViewModel>>(await _usuariosService.BuscarUsuarios());
     }
 
+    public async Task<IEnumerable<UsuariosViewModel>> BuscarUsuariosNome(string nome)
+    {
+        var usuarios = await _usuariosService.BuscarUsuariosNome(nome);
+        return _Mapper.Map<IEnumerable<UsuariosViewModel>>(usuarios);
+    }
 
 }

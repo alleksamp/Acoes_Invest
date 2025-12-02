@@ -20,5 +20,12 @@ public class UsuariosRepository : BaseRepository<Usuarios>, IUsuariosRepository
         return await _context.Usuarios.ToListAsync();
     }
 
+    public async Task<IEnumerable<Usuarios>> BuscarUsuariosNome(string nome)
+    {
+        return await _context.Usuarios
+            .Where(u => u.Nome.Contains(nome))
+            .ToListAsync();
+    }
+
 
 }

@@ -18,5 +18,10 @@ public class UsuariosService : IUsuariosService
         return await _usuariosRepository.BuscarUsuarios();
     }
 
+    public async Task<IEnumerable<Usuarios>> BuscarUsuariosNome(string nome)
+    {
+        return await _usuariosRepository.BuscarUsuariosNome(nome);
+    }
+
 
 }

@@ -21,5 +21,13 @@ public class UsuariosController : ControllerBase
         return Ok(await _usuariosAppService.BuscarUsuarios());
     }
 
+    [HttpGet("Buscar Usuário por nome")]
+    public async Task<IActionResult> BuscarUsuariosNome(string nome)
+    {
+        var usuarios = await _usuariosAppService.BuscarUsuariosNome(nome);
+        if (!usuarios.Any()) return NotFound($"Usuário {nome} não encontrado.");
+        return Ok(await _usuariosAppService.BuscarUsuariosNome(nome));
+    }
+
 
 }
