@@ -61,5 +61,9 @@ public class UsuariosAppService : IUsuariosAppService
         return _Mapper.Map<UsuariosViewModel>(usuarioAtualizado);
     }
 
+    public async Task<bool> DeletarUsuario(int id)
+    {
+        return await _usuariosService.DeletarUsuario(id);
+    }
 
 }

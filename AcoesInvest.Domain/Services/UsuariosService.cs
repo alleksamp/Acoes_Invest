@@ -54,5 +54,15 @@ public class UsuariosService : IUsuariosService
 
     }
 
+    public async Task<bool> DeletarUsuario(int id)
+    {
+        var usuarios = await _usuariosRepository.Get(x => x.Id == id);
+        if (usuarios == null) return false;
+
+        await _usuariosRepository.DeletarUsuario(usuarios);
+        await _usuariosRepository.UnitOfWork.SaveChangesAsync();
+
+        return true;
+    }
 
 }

@@ -46,5 +46,13 @@ public class UsuariosController : ControllerBase
         return Ok(result);
     }
 
+    [HttpDelete("Deletar Usuário")]
+    public async Task<IActionResult> DeletarUsuario(int id)
+    {
+        var result = await _usuariosAppService.DeletarUsuario(id);
+        if (!result) return BadRequest("Não foi possível deletar o usuário");
+        return Ok("Usuário deletado com sucesso");
+    }
+
 
 }

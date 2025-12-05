@@ -9,4 +9,5 @@ public interface IUsuariosService
     Task<IEnumerable<Usuarios>> BuscarUsuariosNome(string nome);
     Task<Usuarios> CadastrarUsuario(Usuarios usuarios);
     Task<Usuarios> AtualizarUsuario(AtualizarUsuariosCommand command);
+    Task<bool> DeletarUsuario(int id);
 }

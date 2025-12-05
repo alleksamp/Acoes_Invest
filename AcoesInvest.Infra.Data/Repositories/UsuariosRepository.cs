@@ -37,4 +37,9 @@ public class UsuariosRepository : BaseRepository<Usuarios>, IUsuariosRepository
         await Task.FromResult(_context.Update(usuarios));
     }
 
+    public async Task DeletarUsuario(Usuarios usuarios)
+    {
+        await Task.FromResult(_context.Usuarios.Remove(usuarios));
+    }
+
 }
