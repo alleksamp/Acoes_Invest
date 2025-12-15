@@ -1,6 +1,5 @@
 ﻿using AcoesInvest.Application.Services.Interfaces;
 using AcoesInvest.Application.ViewModel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Acoes_Invest.Controllers;

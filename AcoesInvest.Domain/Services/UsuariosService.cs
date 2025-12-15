@@ -48,6 +48,12 @@ public class UsuariosService : IUsuariosService
         usuarios.Atualizar(command.Nome, 
             command.Email);
 
+        var verificaEmail = await _usuariosRepository.Get(x => x.Email == command.Email);
+        if (verificaEmail != null)
+        {
+                throw new Exception("Email já cadastrado.");
+        }
+
         await _usuariosRepository.AtualizarUsuario(usuarios);
         await _usuariosRepository.UnitOfWork.SaveChangesAsync();
         return usuarios;
