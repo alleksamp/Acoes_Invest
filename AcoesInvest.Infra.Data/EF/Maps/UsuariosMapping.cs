@@ -18,6 +18,10 @@ public class UsuariosMapping : IEntityTypeConfiguration<Usuarios>
          .HasMaxLength(100)
             .IsRequired();
 
+        builder.Property(x => x.Senha)
+            .HasMaxLength(255)
+            .IsRequired();
+
 
     }
 }

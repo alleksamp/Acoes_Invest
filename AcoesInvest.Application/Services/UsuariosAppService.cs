@@ -37,7 +37,8 @@ public class UsuariosAppService : IUsuariosAppService
         }
 
         var novoUsuarios = new Usuarios(novoUsuariosViewModel.Nome, 
-            novoUsuariosViewModel.Email);
+            novoUsuariosViewModel.Email,
+            novoUsuariosViewModel.Senha);
 
         var UsuariosCadastrado = await _usuariosService.CadastrarUsuario(novoUsuarios);
         return _Mapper.Map<UsuariosViewModel>(UsuariosCadastrado);
@@ -49,7 +50,8 @@ public class UsuariosAppService : IUsuariosAppService
         {
             Id = atualizarUsuariosViewModel.Id,
             Nome = atualizarUsuariosViewModel.Nome,
-            Email = atualizarUsuariosViewModel.Email
+            Email = atualizarUsuariosViewModel.Email,
+            Senha = atualizarUsuariosViewModel.Senha
         };
 
         if (!Util.Util.ValidarEmail(atualizarUsuariosViewModel.Email))

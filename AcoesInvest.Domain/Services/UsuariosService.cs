@@ -46,12 +46,19 @@ public class UsuariosService : IUsuariosService
         if (usuarios == null) return null;  
 
         usuarios.Atualizar(command.Nome, 
-            command.Email);
+            command.Email,
+            command.Senha);
 
         var verificaEmail = await _usuariosRepository.Get(x => x.Email == command.Email);
         if (verificaEmail != null)
         {
                 throw new Exception("Email já cadastrado.");
+        }
+
+        var verificaSenha = await _usuariosRepository.Get(x => x.Senha == command.Senha);
+        if (verificaSenha != null)
+        {
+            throw new Exception("A senha não pode ser igual a anterior.");
         }
 
         await _usuariosRepository.AtualizarUsuario(usuarios);
