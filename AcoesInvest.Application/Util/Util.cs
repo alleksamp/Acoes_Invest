@@ -38,5 +38,44 @@ public class Util
         return true;
 
     }
+
+    public static bool ValidarSenha(string senha, out string erro)
+    {
+        erro = string.Empty;
+
+        if (string.IsNullOrWhiteSpace(senha))
+        {
+            erro = "A senha não pode ser vazia.";
+            return false;
+        }
+
+        if (senha.Length < 8)
+        {
+            erro = "A senha deve conter no mínimo 8 caracteres.";
+            return false;
+        }
+
+        if (!senha.Any(char.IsUpper))
+        {
+            erro = "A senha deve conter pelo menos uma letra maiúscula.";
+            return false;
+        }
+
+        if (!senha.Any(char.IsLower))
+        {
+            erro = "A senha deve conter pelo menos uma letra minúscula.";
+            return false;
+        }
+
+        if (!senha.Any(char.IsDigit))
+        {
+            erro = "A senha deve conter pelo menos um número.";
+            return false;
+        }
+
+        return true;
+    }
+
+
 }
 

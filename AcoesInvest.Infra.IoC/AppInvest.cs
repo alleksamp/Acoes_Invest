@@ -42,6 +42,9 @@ public static class AppInvest
         services.AddScoped<IUsuariosAppService, UsuariosAppService>();
         services.AddScoped<IUsuariosService, UsuariosService>();
 
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<TokenService>();
+
         return services;
     }
 
@@ -60,6 +63,7 @@ public static class AppInvest
         // Removemos o registro do repositório do ConfigureApplicationServices
         services.AddScoped<IAcoesRepository, AcoesRepository>();
         services.AddScoped<IUsuariosRepository, UsuariosRepository>();
+
 
         return services;
     }

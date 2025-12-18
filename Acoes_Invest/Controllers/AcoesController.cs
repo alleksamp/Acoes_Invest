@@ -1,9 +1,11 @@
 ﻿using AcoesInvest.Application.Services.Interfaces;
 using AcoesInvest.Application.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Acoes_Invest.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class AcoesController : Controller

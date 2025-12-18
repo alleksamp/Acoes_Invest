@@ -1,5 +1,6 @@
 ﻿using AcoesInvest.Application.Services.Interfaces;
 using AcoesInvest.Application.ViewModel;
+using AcoesInvest.Domain.Interfaces;
 using AcoesInvest.Domain.Interfaces.Services;
 using AcoesInvest.Domain.Models;
 using AcoesInvest.Domain.Models.Command;
@@ -31,14 +32,17 @@ public class UsuariosAppService : IUsuariosAppService
 
     public async Task<UsuariosViewModel> CadastrarUsuario(NovoUsuariosViewModel novoUsuariosViewModel)
     {
+
         if (!Util.Util.ValidarEmail(novoUsuariosViewModel.Email))
         {
             throw new Exception("Email inválido.");
         }
 
+        string senhaHash = BCrypt.Net.BCrypt.HashPassword(novoUsuariosViewModel.Senha);
+
         var novoUsuarios = new Usuarios(novoUsuariosViewModel.Nome, 
             novoUsuariosViewModel.Email,
-            novoUsuariosViewModel.Senha);
+            senhaHash);
 
         var UsuariosCadastrado = await _usuariosService.CadastrarUsuario(novoUsuarios);
         return _Mapper.Map<UsuariosViewModel>(UsuariosCadastrado);
@@ -57,6 +61,11 @@ public class UsuariosAppService : IUsuariosAppService
         if (!Util.Util.ValidarEmail(atualizarUsuariosViewModel.Email))
         {
             throw new Exception("Email inválido.");
+        }
+
+        if (!Util.Util.ValidarSenha(atualizarUsuariosViewModel.Senha, out var erro))
+        {
+            throw new ArgumentException(erro);
         }
 
         var usuarioAtualizado = await _usuariosService.AtualizarUsuario(command);

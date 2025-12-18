@@ -2,8 +2,6 @@
 using AcoesInvest.Domain.Models;
 using AcoesInvest.Infra.Data.EF.Maps;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace AcoesInvest.Infra.Data.EF;
 
