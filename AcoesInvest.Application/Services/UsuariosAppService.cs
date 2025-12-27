@@ -1,6 +1,5 @@
 ﻿using AcoesInvest.Application.Services.Interfaces;
 using AcoesInvest.Application.ViewModel;
-using AcoesInvest.Domain.Interfaces;
 using AcoesInvest.Domain.Interfaces.Services;
 using AcoesInvest.Domain.Models;
 using AcoesInvest.Domain.Models.Command;
