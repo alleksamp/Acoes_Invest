@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Acoes_Invest.Controllers;
 
-[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class UsuariosController : ControllerBase
@@ -16,14 +15,15 @@ public class UsuariosController : ControllerBase
         _usuariosAppService = usuariosAppService;
     }
 
-
-    [HttpGet("Listar Usuários")]
+    [Authorize]
+    [HttpGet("Listar")]
     public async Task<IActionResult> BuscarUsuarios()
     {
         return Ok(await _usuariosAppService.BuscarUsuarios());
     }
 
-    [HttpGet("Buscar Usuário por nome")]
+    [Authorize]
+    [HttpGet("BuscarUsuárioNome")]
     public async Task<IActionResult> BuscarUsuariosNome(string nome)
     {
         var usuarios = await _usuariosAppService.BuscarUsuariosNome(nome);
@@ -31,7 +31,7 @@ public class UsuariosController : ControllerBase
         return Ok(await _usuariosAppService.BuscarUsuariosNome(nome));
     }
 
-    [HttpPost("Cadastrar Usuário")]
+    [HttpPost("Cadastrar")]
     public async Task<IActionResult> CadastrarUsuario([FromBody] NovoUsuariosViewModel vm)
     {
         var result = await _usuariosAppService.CadastrarUsuario(vm);
@@ -39,7 +39,8 @@ public class UsuariosController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("Atualizar Usuário")]
+    [Authorize]
+    [HttpPut("Atualizar")]
     public async Task<IActionResult> AtualizarUsuario([FromBody] AtualizarUsuariosViewModel vm)
     {
         var result = await _usuariosAppService.AtualizarUsuario(vm);
@@ -47,7 +48,8 @@ public class UsuariosController : ControllerBase
         return Ok(result);
     }
 
-    [HttpDelete("Deletar Usuário")]
+    [Authorize]
+    [HttpDelete("Deletar")]
     public async Task<IActionResult> DeletarUsuario(int id)
     {
         var result = await _usuariosAppService.DeletarUsuario(id);

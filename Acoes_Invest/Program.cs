@@ -65,7 +65,7 @@ public class Program
         })
         .AddJwtBearer(options =>
         {
-            options.RequireHttpsMetadata = false; // Mudar para true em produção
+            options.RequireHttpsMetadata = false; 
             options.SaveToken = true;
             options.TokenValidationParameters = new TokenValidationParameters
             {

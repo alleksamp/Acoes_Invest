@@ -16,13 +16,13 @@ public class AcoesController : Controller
         _acoesAppService = acoesAppService;
     }
 
-    [HttpGet("Listar Ações")]
+    [HttpGet("Listar")]
     public async Task<IActionResult> BuscarAcoes()
     {
         return Ok(await _acoesAppService.BuscarAcoes());
     }
 
-    [HttpGet("Buscar por nome")]
+    [HttpGet("BuscarNome")]
     public async Task<IActionResult> BuscarAcoesNome(string nome)
     {
         var acoes = await _acoesAppService.BuscarAcoesNome(nome);
@@ -30,7 +30,7 @@ public class AcoesController : Controller
         return Ok(acoes);
     }
 
-    [HttpPost("Cadastrar ações")]
+    [HttpPost("Cadastrar")]
     public async Task<IActionResult> CadastrarAcoes([FromBody] NovoAcoesViewModel vm)
     {
         var result = await _acoesAppService.CadastrarAcoes(vm);
@@ -38,7 +38,7 @@ public class AcoesController : Controller
         return Ok(result);
     }
 
-    [HttpPut("Atualizar ações")]
+    [HttpPut("Atualizar")]
     public async Task<IActionResult> AtualizarAcoes([FromBody] AtualizarAcoesViewModel vm)
     {
         var result = await _acoesAppService.AtualizarAcoes(vm);
@@ -46,7 +46,7 @@ public class AcoesController : Controller
         return Ok(result);
     }
 
-    [HttpDelete("Deletar ações")]
+    [HttpDelete("Deletar")]
     public async Task<IActionResult> DeletarAcoes(int Id)
     {
         var result = await _acoesAppService.DeletarAcoes(Id);
