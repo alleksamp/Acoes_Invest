@@ -22,6 +22,11 @@ public class AcoesAppService : IAcoesAppService
     {
         return _Mapper.Map<IEnumerable<AcoesViewModel>>(await _acoesService.BuscarAcoes());
     }
+    public async Task<AcoesViewModel> BuscarAcoesId(int Id)
+    {
+        var acoes = await _acoesService.BuscarAcoesId(Id);
+        return _Mapper.Map<AcoesViewModel>(acoes);
+    }
 
     public async Task<IEnumerable<AcoesViewModel>> BuscarAcoesNome(string nome)
     {

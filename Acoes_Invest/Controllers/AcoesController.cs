@@ -22,6 +22,14 @@ public class AcoesController : Controller
         return Ok(await _acoesAppService.BuscarAcoes());
     }
 
+    [HttpGet("BuscarId")]
+    public async Task<IActionResult> BuscarAcoesId(int Id)
+    {
+        var acoes = await _acoesAppService.BuscarAcoesId(Id);
+        if (acoes == null) return NotFound($"Ação {Id} não encontrada.");
+        return Ok(acoes);
+    }
+
     [HttpGet("BuscarNome")]
     public async Task<IActionResult> BuscarAcoesNome(string nome)
     {

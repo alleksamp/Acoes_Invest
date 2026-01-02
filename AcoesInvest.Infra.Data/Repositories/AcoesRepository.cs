@@ -19,6 +19,11 @@ public class AcoesRepository : BaseRepository<Acoes>, IAcoesRepository
     {
         return await _context.Acoes.ToListAsync();
     }
+    public async Task<Acoes> BuscarAcoesId(int Id)
+    {
+        var result = await _context.Acoes.FirstOrDefaultAsync(x => x.Id == Id);
+        return result;
+    }
 
     public async Task<IEnumerable<Acoes>> BuscarAcoesNome(string nome)
     {
