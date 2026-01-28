@@ -5,10 +5,10 @@ namespace AcoesInvest.Domain.Interfaces.Services;
 
 public interface IAcoesService
 {
-    Task<IEnumerable<Acoes>> BuscarAcoes();
-    Task<Acoes> BuscarAcoesId(int Id);
-    Task<IEnumerable<Acoes>> BuscarAcoesNome(string nome);
+    Task<IEnumerable<Acoes>> BuscarAcoes(int usuarioId);
+    Task<Acoes> BuscarAcoesId(int Id, int usuarioId);
+    Task<IEnumerable<Acoes>> BuscarAcoesNome(string nome, int usuarioId);
     Task<Acoes> CadastrarAcoes(Acoes acoes);
     Task<Acoes> AtualizarAcoes(AtualizarAcoesCommand command);
-    Task<bool> DeletarAcoes(int Id);
+    Task<bool> DeletarAcoes(int Id, int usuarioId);
 }

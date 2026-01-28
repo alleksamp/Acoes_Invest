@@ -10,19 +10,19 @@ public class CadastroContext : DbContext, IUnitOfWork
     public CadastroContext(DbContextOptions options) : base(options)
     {
         ChangeTracker.LazyLoadingEnabled = false;
-        //CriarBancoCasoNaoExista();
     }
-
-    //private void CriarBancoCasoNaoExista()
-    //{
-    //    if (!(Database.GetService<IDatabaseCreator>() as RelationalDatabaseCreator).Exists())
-    //        Database.EnsureCreated();
-    //}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new AcoesMapping());
-        modelBuilder.ApplyConfiguration(new UsuariosMapping());
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CadastroContext).Assembly);
+
+        modelBuilder.Entity<Acoes>()
+        .HasOne<Usuarios>() // Uma Ação tem um Usuário
+        .WithMany()        // Um Usuário tem muitas Ações
+        .HasForeignKey(x => x.UsuarioId)
+        .OnDelete(DeleteBehavior.Cascade); // Se deletar o usuário, as ações dele somem
+
+        base.OnModelCreating(modelBuilder);
 
     }
     public DbSet<Acoes> Acoes { get; set; }

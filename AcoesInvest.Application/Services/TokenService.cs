@@ -27,9 +27,10 @@ namespace AcoesInvest.Application.Services;
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                new Claim(ClaimTypes.Name, usuario.Nome.ToString()),
-                new Claim(ClaimTypes.Email, usuario.Email.ToString()),
-                    // Você pode adicionar outras Claims, como o ID e o Papel (Role)
+                    new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
+                    new Claim(ClaimTypes.Name, usuario.Nome.ToString()),
+                    new Claim(ClaimTypes.Email, usuario.Email.ToString()),
+                    
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(double.Parse(_configuration["JwtSettings:ExpirationInMinutes"]!)),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),

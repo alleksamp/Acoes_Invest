@@ -9,4 +9,5 @@ public class AtualizarAcoesCommand
     public decimal PmIr { get; set; }
     public decimal Dividendos { get; set; }
     public decimal TotalInv { get; set; }
+    public int UsuarioId { get; set; }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AcoesInvest.Application.ViewModel;
+﻿namespace AcoesInvest.Application.ViewModel;
 
 public class AtualizarAcoesViewModel
 {
@@ -15,4 +9,5 @@ public class AtualizarAcoesViewModel
     public decimal PmIr { get; set; }
     public decimal Dividendos { get; set; }
     public decimal TotalInv { get; set; }
+
 }

@@ -40,7 +40,7 @@ public class UsuariosAppService : IUsuariosAppService
         string senhaHash = BCrypt.Net.BCrypt.HashPassword(novoUsuariosViewModel.Senha);
 
         var novoUsuarios = new Usuarios(novoUsuariosViewModel.Nome, 
-            novoUsuariosViewModel.Email,
+            novoUsuariosViewModel.Email, 
             senhaHash);
 
         var UsuariosCadastrado = await _usuariosService.CadastrarUsuario(novoUsuarios);

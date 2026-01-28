@@ -15,20 +15,24 @@ public class AcoesRepository : BaseRepository<Acoes>, IAcoesRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Acoes>> BuscarAcoes()
+    public async Task<IEnumerable<Acoes>> BuscarAcoes(int usuarioId)
     {
-        return await _context.Acoes.ToListAsync();
+        return await _context.Acoes
+        .Where(x => x.UsuarioId == usuarioId)
+        .ToListAsync();
     }
-    public async Task<Acoes> BuscarAcoesId(int Id)
+    public async Task<Acoes> BuscarAcoesId(int Id, int usuarioId)
     {
-        var result = await _context.Acoes.FirstOrDefaultAsync(x => x.Id == Id);
+        var result = await _context.Acoes
+                .FirstOrDefaultAsync(x => x.Id == Id && x.UsuarioId == usuarioId);
         return result;
     }
 
-    public async Task<IEnumerable<Acoes>> BuscarAcoesNome(string nome)
+    public async Task<IEnumerable<Acoes>> BuscarAcoesNome(string nome, int usuarioId)
     {
-        var result = await _context.Acoes.Where(x => x.Nome.Contains(nome)).ToListAsync();
-
+        var result = await _context.Acoes
+        .Where(x => x.Nome.Contains(nome) && x.UsuarioId == usuarioId)
+        .ToListAsync();
         return result;
     }
 

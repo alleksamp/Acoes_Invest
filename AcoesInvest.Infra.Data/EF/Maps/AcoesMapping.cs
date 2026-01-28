@@ -19,19 +19,22 @@ public class AcoesMapping : IEntityTypeConfiguration<Acoes>
             .IsRequired();
 
         builder.Property(x => x.Pm)
-            .HasMaxLength(8)
+            .HasColumnType("decimal(18,2)")
             .IsRequired();
 
         builder.Property(x => x.PmIr)
-            .HasMaxLength(8)
+            .HasColumnType("decimal(18,2)")
             .IsRequired();
 
         builder.Property(x => x.Dividendos)
-             .HasMaxLength(50)
+             .HasColumnType("decimal(18,2)")
             .IsRequired();
 
         builder.Property(x => x.TotalInv)
-           .HasMaxLength(50)
+           .HasColumnType("decimal(18,2)")
+           .IsRequired();
+
+        builder.Property(x => x.UsuarioId)
            .IsRequired();
 
     }

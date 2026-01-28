@@ -18,36 +18,38 @@ public class AcoesAppService : IAcoesAppService
         _Mapper = mapper;
     }
 
-    public async Task<IEnumerable<AcoesViewModel>> BuscarAcoes()
+    public async Task<IEnumerable<AcoesViewModel>> BuscarAcoes(int usuarioId)
     {
-        return _Mapper.Map<IEnumerable<AcoesViewModel>>(await _acoesService.BuscarAcoes());
+        return _Mapper.Map<IEnumerable<AcoesViewModel>>(await _acoesService.BuscarAcoes(usuarioId));
     }
-    public async Task<AcoesViewModel> BuscarAcoesId(int Id)
+    public async Task<AcoesViewModel> BuscarAcoesId(int Id, int usuarioId)
     {
-        var acoes = await _acoesService.BuscarAcoesId(Id);
+        var acoes = await _acoesService.BuscarAcoesId(Id, usuarioId);
         return _Mapper.Map<AcoesViewModel>(acoes);
     }
 
-    public async Task<IEnumerable<AcoesViewModel>> BuscarAcoesNome(string nome)
+    public async Task<IEnumerable<AcoesViewModel>> BuscarAcoesNome(string nome, int usuarioId)
     {
-        var acoes = await _acoesService.BuscarAcoesNome(nome);
+        var acoes = await _acoesService.BuscarAcoesNome(nome, usuarioId);
         return _Mapper.Map<IEnumerable<AcoesViewModel>>(acoes);
     }
 
-    public async Task<AcoesViewModel> CadastrarAcoes(NovoAcoesViewModel novoAcoesViewModel)
+    public async Task<AcoesViewModel> CadastrarAcoes(NovoAcoesViewModel novoAcoesViewModel, int usuarioId)
     {
         var novoAcoes = new Acoes(novoAcoesViewModel.Nome,
             novoAcoesViewModel.Quantidade,
             novoAcoesViewModel.Pm,
             novoAcoesViewModel.PmIr,
             novoAcoesViewModel.Dividendos,
-            novoAcoesViewModel.TotalInv);
+            novoAcoesViewModel.TotalInv,
+            usuarioId
+            );
 
         var acoesCriadas = await _acoesService.CadastrarAcoes(novoAcoes);
         return _Mapper.Map<AcoesViewModel>(acoesCriadas);
     }
 
-    public async Task<AcoesViewModel> AtualizarAcoes(AtualizarAcoesViewModel atualizarAcoesViewModel)
+    public async Task<AcoesViewModel> AtualizarAcoes(AtualizarAcoesViewModel atualizarAcoesViewModel, int usuarioId)
     {
         var command = new AtualizarAcoesCommand
         {
@@ -57,16 +59,17 @@ public class AcoesAppService : IAcoesAppService
             Pm = atualizarAcoesViewModel.Pm,
             PmIr = atualizarAcoesViewModel.PmIr,
             Dividendos = atualizarAcoesViewModel.Dividendos,
-            TotalInv = atualizarAcoesViewModel.TotalInv
+            TotalInv = atualizarAcoesViewModel.TotalInv,
+            UsuarioId = usuarioId
         };
 
         var acoesAtualizadas = await _acoesService.AtualizarAcoes(command);
         return _Mapper.Map<AcoesViewModel>(acoesAtualizadas);
     }
 
-    public async Task<bool> DeletarAcoes(int Id)
+    public async Task<bool> DeletarAcoes(int Id, int usuarioId)
     {
-        return await _acoesService.DeletarAcoes(Id);
+        return await _acoesService.DeletarAcoes(Id, usuarioId);
     }
 
 }
