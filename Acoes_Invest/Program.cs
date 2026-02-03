@@ -13,13 +13,18 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+        builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
         var myDefaultCors = "muDefaultCors";
         builder.Services.AddCors(options =>
         {
             options.AddPolicy(name: myDefaultCors,
                 policy =>
                 {
-                    policy.WithOrigins("http://localhost:3000", "http://localhost:5173") // URLs do seu Front-end (React/Vite)
+                    policy.WithOrigins("http://localhost:3000", 
+                        "http://localhost:5173",
+                        "https://seu-projeto.netlify.app")
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });
@@ -75,13 +80,11 @@ public class Program
                 ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
                 ValidateAudience = true,
                 ValidAudience = builder.Configuration["JwtSettings:Audience"],
-                ValidateLifetime = true, // Valida a expiração do token
-                ClockSkew = TimeSpan.Zero // Opcional: Garante que o token expire exatamente na hora
+                ValidateLifetime = true, 
+                ClockSkew = TimeSpan.Zero
             };
         });
         builder.Services.AddAuthorization();
-
-
         builder.Services.ConfigureDependencies(builder.Configuration);
 
         var app = builder.Build();
@@ -92,7 +95,7 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
+        // app.UseHttpsRedirection();
 
         app.UseRouting();
         app.UseCors(myDefaultCors);

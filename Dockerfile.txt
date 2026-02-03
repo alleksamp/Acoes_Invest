@@ -1,0 +1,30 @@
+# Estágio de Build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copiar os arquivos .csproj de TODOS os seus projetos para restaurar
+COPY ["Acoes_Invest/Acoes_Invest.csproj", "Acoes_Invest/"]
+COPY ["AcoesInvest.Application/AcoesInvest.Application.csproj", "AcoesInvest.Application/"]
+COPY ["AcoesInvest.Domain/AcoesInvest.Domain.csproj", "AcoesInvest.Domain/"]
+COPY ["AcoesInvest.Infra.Data/AcoesInvest.Infra.Data.csproj", "AcoesInvest.Infra.Data/"]
+COPY ["AcoesInvest.Infra.IoC/AcoesInvest.Infra.IoC.csproj", "AcoesInvest.Infra.IoC/"]
+
+# Executar o restore
+RUN dotnet restore "Acoes_Invest/Acoes_Invest.csproj"
+
+# Copiar o restante do código
+COPY . .
+WORKDIR "/src/Acoes_Invest"
+
+# Compilar e Publicar
+RUN dotnet publish "Acoes_Invest.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+# Estágio de Runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+# Variável de ambiente para a porta (o Render vai sobrescrever isso, mas é bom ter)
+ENV ASPNETCORE_URLS=http://+:8080
+
+ENTRYPOINT ["dotnet", "Acoes_Invest.dll"]
